@@ -1,0 +1,20 @@
+{% if page_obj.has_next %}
+				    <li class="page-item">
+				        <a class="page-link" href="/artikel/page/{{ page_obj.next_page_number }}">next</a>
+				    </li>
+				{% else %}
+					<li class="page-item disabled">
+				      <a class="page-link">Next</a>
+				    </li>
+				{% endif %}
+
+
+{% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a href="?{{ myFilter.form.qs.urlencode }}?page={{ dt_kegiatan.next_page_number }}">Next</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a href="?{{ filter_params }}?page={{ dt_kegiatan.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}

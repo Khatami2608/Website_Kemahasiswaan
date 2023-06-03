@@ -1,0 +1,88 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h3 mb-4 text-gray-800">Data Kegiatan Kampus Politeknik Aceh</h1>
+    </div>
+  </div>
+
+  <div class="card" id="_card_">
+    <div class="card-header">
+      Table Kegiatan
+    </div>
+    <div class="card-body">
+      <div class="d-flex justify-content-between mb-3">
+        <h3>Data Buku:
+          <a href="{% url 'tambah_kegiatan' %}" class="btn btn-success">Tambah +</a>
+        </h3>
+        {% for message in messages %}
+        {% if messages %}
+        <div class="alert alert-success">
+          {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <form method="post" action="{% url 'cari_kegiatan' %}" class="form-inline mr-auto w-100 navbar-search mb-4 d-flex-end">
+          {% csrf_token %}
+          <div class="input-group">
+            {{ search_form.keyword }}
+              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                       <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+
+      <table class="table table-striped-columns mt-4">
+        <thead class="text-center table-dark">
+          <tr>
+            <th>Kegiatan</th>
+            <th>Publikasi</th>
+            <th>Deskripsi</th>
+            <th>Image</th>
+            <th scope="col" style="width: 10rem;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for kegiatan in dt_kegiatan %}
+          <tr>
+            <td>{{ kegiatan.judul }}</td>
+            <td>{{ kegiatan.tanggal_publikasi }}</td>
+            <td>{{ kegiatan.Deskripsi }}</td>
+            {% if kegiatan.image %}
+            <td><img src="{{ kegiatan.image.url }}" width="80px" height="80px" /></td>
+            {% else %}
+            <td>No image available</td>
+            {% endif %}
+            <td class="text-center d-flex justify-content-between">
+              <a href="{% url 'ubah_kegiatan' kegiatan.id %}" class="btn btn-primary btn-sm">Ubah</a>  
+              <a href="#hapus-{{ kegiatan.id }}" class="btn btn-danger btn-sm" data-bs-toggle="modal">hapus</a>
+              <!-- <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#hapus-{{ kegiatan.id }}">Hapus</button> -->
+            </td>
+            </tr>
+            <div class="modal" tabindex="-1" id="hapus-{{ kegiatan.id }}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Hapus</h5>
+                  </div>
+                  <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus <strong>{{ kegiatan.judul|upper }}</strong>?
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{% url 'hapus_kegiatan' kegiatan.id %}" class="btn btn-danger">Hapus</a>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Batal</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+  Edit Kegiatan - Kemahasiswaan Poltek Aceh
+{% endblock %}
+
+{% block content %}
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h1 class="h2">Data Kegiatan Kampus Politeknik Aceh</h1>
+		    <div class="btn-toolbar mb-2 mb-md-0"></div>
+		</div>
+
+		<div class="card">
+		    <div class="card-header">
+		          Form Kegiatan
+		    </div>
+		        <div class="card-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-md">
+								<h3 class="font-weight-bold text-primary">Ubah : {{ dt_kegiatan.judul }}</h3><br>
+
+								{% for message in messages %}
+									{% if messages %}
+										<div class="alert alert-success">
+											{{ message }}
+										</div>
+									{% endif %}
+								{% endfor %}
+								<form action="{% url 'ubah_kegiatan' dt_kegiatan.id %}" method="post">
+								    {% csrf_token %}
+								    {{ form.as_p }}
+								    <button class="btn btn-primary">Ubah</button>
+								    <a href="/data-kegiatan" class="btn btn-danger">Kembali</a>
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+		    </div>						
+
+{% endblock %}

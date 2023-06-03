@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>
+        {% block page_title %}
+        {% endblock %}
+    </title>
+    {% include "snippets/style.html" %}
+
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        {% include "snippets/sidebar.html" %}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            {% include "snippets/navbar.html" %}      
+
+                <!-- Begin Page Content -->
+                <div class="container">
+                    <!-- <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> -->
+                    <div class="col-md ml-sm-auto">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                    <!-- </main> -->
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    {% include "snippets/script.html" %}
+</body>
+</html>
