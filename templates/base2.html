@@ -2,29 +2,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <title>
         {% block page_title %}
         {% endblock %}
     </title>
     {% include "snippets/style.html" %}
-
 </head>
 
-<body id="page-top">
+<body>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
-        {% include "snippets/sidebar.html" %}
+        {% include "snippets/navbar.html" %}  
+        <!-- Sidebar -->
+        <!-- <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion shadow" id="accordionSidebar" id="navbar" style="background-color: #0A2647;"> -->
+        <div class="row no-gutters mt-5  "><!--awal-->
+            <div class="col-md-2 sidebar sidebar-dark accordion shadow bg-opacity-100 mt-1 px-3 pt-4 " style="background: linear-gradient(to bottom, #0a2647 0%, #000066 100%)">
+
+            {% include "snippets/sidebar.html" %}
+        </div>
+        <div class="col mt-4">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- </ul> -->
+        <!-- End of Sidebar -->
+
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-            {% include "snippets/navbar.html" %}      
+             <!-- Main Content -->
+            <div id="content">
+
+                 
 
                 <!-- Begin Page Content -->
                 <div class="container">
                     <!-- <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"> -->
                     <div class="col-md ml-sm-auto">
-                        {% block content %}
-                        {% endblock %}
+                        
                     </div>
                     <!-- </main> -->
                 </div>
@@ -34,20 +51,22 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+           <!--  <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2023</span>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
+        </div>
     </div>
     <!-- End of Page Wrapper -->
-
     {% include "snippets/script.html" %}
+
 </body>
+
 </html>

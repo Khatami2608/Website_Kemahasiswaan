@@ -12,29 +12,35 @@ class kegiatanAdmin(admin.ModelAdmin):
 		'update',
 	]
 admin.site.register(kegiatan, kegiatanAdmin)
+admin.site.register(Prodi)
+admin.site.register(Agama)
+admin.site.register(Gender)
 
 # MODEL UNTUK MAHASISWA
 class MahasiswaAdmin(admin.ModelAdmin):
-    list_display = ['NIM', 'nama', 'prodi_mhs']  # Menggunakan 'get_prodi' sebagai metode yang mengembalikan prodi
-
-    def get_prodi(self, obj):
-        return obj.prodi
-
-    prodi_mhs.short_description = 'Prodi'
-
-
-# MODEL UNTUK PRESTASI MAHASISWA
-class PrestasiAdmin(admin.ModelAdmin):
-    list_display = ['nim_mhs', 'nama', 'prodi_id', 'prestasi', 'penyelenggara', 'tanggal', 'tingkat', 'juara']
-    search_fields = ['NIM__NIM', 'nama']  # Menambahkan prefix NIM__ untuk mencari berdasarkan NIM
-    list_per_page = 8
-
-    def get_prodi(self, obj):
-        return obj.prodi
-
-    prodi_id.short_description = 'Prodi'
-
+    list_display = ['nim', 'nama', 'prodi', 'agama', 'gender']
+    search_fields = ['nim', 'nama']
+    list_filter = ['prodi']
 
 admin.site.register(Mahasiswa, MahasiswaAdmin)
+
+class PrestasiAdmin(admin.ModelAdmin):
+    list_display = ['nim', 'nama', 'prodi', 'prestasi', 'tingkat', 'publikasi']
+    search_fields = ['nim', 'nama']
+    list_filter = ['prodi']
+
 admin.site.register(Prestasi, PrestasiAdmin)
-admin.site.register(Prodi)
+
+class PelanggaranAdmin(admin.ModelAdmin):
+	list_display = ['nim', 'nama', 'prodi', 'angkatan', 'Jenis_pelanggaran', 'sanksi', 'publikasi']
+	search_fields = ['nim', 'nama']
+	list_filter = ['prodi']
+
+admin.site.register(Pelanggaran, PelanggaranAdmin)
+
+class DataBeasiswaAdmin(admin.ModelAdmin):
+	readonly_fields=[
+		'publikasi',
+	]
+
+admin.site.register(Data_Beasiswa, DataBeasiswaAdmin)
